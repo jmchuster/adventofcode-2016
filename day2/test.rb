@@ -10,3 +10,14 @@ assert '1985' == move(<<-eos
   UUUUD
 eos
 )
+
+require './day2_b.rb'
+
+puts result = hex_move(<<-eos
+  ULL
+  RRDDD
+  LURDL
+  UUUUD
+eos
+)
+assert result == '5DB3'
