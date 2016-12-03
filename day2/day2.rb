@@ -3,34 +3,30 @@
 # 4 5 6
 # 7 8 9
 
-def U(int)
-  int - 3 < 1 ? int : int - 3
-end
+module Mappings
+  def Mappings.U(int)
+    int - 3 < 1 ? int : int - 3
+  end
 
-def D(int)
-  int + 3 > 9 ? int : int + 3
-end
+  def Mappings.D(int)
+    int + 3 > 9 ? int : int + 3
+  end
 
-def L(int)
-  (int - 1) % 3 == 0 ? int : int - 1
-end
+  def Mappings.L(int)
+    (int - 1) % 3 == 0 ? int : int - 1
+  end
 
-def R(int)
-  int % 3 == 0 ? int : int + 1
+  def Mappings.R(int)
+    int % 3 == 0 ? int : int + 1
+  end
 end
 
 def move(input)
-  current_start = 5
-  instrs = input.split("\n").map(&:strip).reject(&:empty?)
-  instrs.map { |instr|
-    current_start = instr.chars.reduce(current_start) {|memo, obj|
-      case obj
-        when 'U' then U(memo)
-        when 'D' then D(memo)
-        when 'L' then L(memo)
-        when 'R' then R(memo)
-      end
-    }
+  lines = input.split("\n").map(&:strip).reject(&:empty?)
+
+  starting_num = 5
+  lines.map { |line|
+    starting_num = line.chars.reduce(starting_num) { |num, direction| Mappings.send(direction, num) }
   }.join('')
 end
 
